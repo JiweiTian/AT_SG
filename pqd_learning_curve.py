@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 batch_size=32
 nb_epoch=10
-eps=0.5   ###0.4FGSM不能都成功，0.5FGSM能都成功(17种类型都改变分类结果)
+eps=0.5
 gamma=0
 
 def scaled_gradient(x, y, predictions):
@@ -146,7 +146,7 @@ if __name__ == '__main__':
     predictions = model(x)
     predictions_logits = predictions.op.inputs[0]
     predictions = predictions_logits
-    #################################有无logits#######################################
+    #################################logits#######################################
 
     sgd = SGD(lr=0.0001, decay=1e-6, momentum=0.9, nesterov=True)
     model.compile(loss=keras.losses.categorical_crossentropy,

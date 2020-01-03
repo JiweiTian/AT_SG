@@ -26,7 +26,7 @@ from scipy.spatial.distance import cdist
 
 batch_size=32
 nb_epoch=10
-eps=0.5   ###0.4FGSM不能都成功，0.5FGSM能都成功(17种类型都改变分类结果)
+eps=0.5
 gamma=0
 
 def scaled_gradient(x, y, predictions):
