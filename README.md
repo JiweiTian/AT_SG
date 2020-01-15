@@ -1,24 +1,24 @@
 # AT_SG
  Adversarial-Attacks-and-Defense-Methods-in-the-Smart-Grid
-This is the code example for attacking a normal Neural Networks with adversarial inputs （Adversarial Attacks and Defense Methods in the Smart Grid. 
+This is the code example for attacking a normal Neural Networks with adversarial inputs （Adversarial Attacks and Defense Methods in the Smart Grid). 
 
-Please put the code from github or dropbox together to the code folder.
+Please put the data from github or dropbox together to the code folder.
 
-1> power quality assessment by classifying (17) voltage signals using deep convolutional neural network (pqd_classify.py).
+1> power quality assessment by classifying (17) voltage signals using deep CNN (pqd_classify.py).
 
 A labeled dataset of 255000 signals was constructed using 15000 signals belonging to each class (17signal15000.mat).
 
 the voltage signals are generated considering the following references:
 
-Integral mathematical model of power quality disturbances
+"Integral mathematical model of power quality disturbances"
 
-Detection and Classification of Multiple Power Quality Disturbances based on Temporal Deep Learning
+"Detection and Classification of Multiple Power Quality Disturbances based on Temporal Deep Learning"
 
-Optimal Feature Selection for Power-Quality Disturbances Classification
+"Optimal Feature Selection for Power-Quality Disturbances Classification"
 
-the deep convolutional neural network model is inspired by the reference:
+the deep CNN model is inspired by the reference:
 
-A novel deep learning method for the classification of power quality disturbances using deep convolutional neural network (Neural_Net_Module.py).
+"A novel deep learning method for the classification of power quality disturbances using deep convolutional neural network" (Neural_Net_Module.py).
 
 The trained model achieves 98.5% testing accuracy (17oldweights_dnn_clean10.h5).
 
@@ -27,9 +27,9 @@ The trained model achieves 98.5% testing accuracy (17oldweights_dnn_clean10.h5).
 For comparsion, we also implemented the FGSM based attack method (pqd_FGSM.py).
 
 
-3> Implementing the proposed signal-agnostic attack algorithm to generate universal perturbations that cause natural PQ（pqd_signal_agnostic_attack.py）
+3> Implementing the proposed signal-agnostic attack algorithm to generate universal perturbations that cause natural PQ signals to be misclassified with high probability:
 
-signals to be misclassified with high probability:
+（pqd_signal_agnostic_attack.py）
 
 call signal_specific.py
 
