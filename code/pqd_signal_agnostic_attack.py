@@ -7,7 +7,7 @@ import tensorflow as tf
 from Neural_Net_Module import dnn_model
 from keras.optimizers import SGD
 import h5py
-import tables
+
 import matlab
 import matplotlib.pyplot as plt
 import time
@@ -187,6 +187,8 @@ if __name__ == '__main__':
                 current = np.argmax(current)  # class
                 original = current  # use original label as the reference
 
+                #####貌似少了if判断，如果加了扰动已经满足条件，则该样本无需再生成对抗扰动
+
                 # Repeat this main loop until we have achieved mis classification
                 adv_x = signal_specific(teX[counter] + universal_pert, sample_y, x, y, current, original, model, max_iter,
                                      grad_ssa, nb_candidate, overshoot, teX[counter], predictions, sess, iteration)
@@ -196,6 +198,7 @@ if __name__ == '__main__':
                     # Project on L_p ball
                     universal_pert = projection(universal_pert,8, 2)
 
+                ####### 貌似没有终止条件
                 if counter % 5000 == 0:
                     print(np.linalg.norm(universal_pert, ord=2, keepdims=True))
                     np.save("universal_pert_5000_{}_{}.npy".format(nb_iter,counter/5000), universal_pert)
@@ -227,6 +230,11 @@ if __name__ == '__main__':
         pqd_predict_normal = np.argmax(model.predict(teX), axis=1)
         pqd_predict_attack = np.argmax(model.predict(adv_univer), axis=1)
 
+        Pert_ratio = np.linalg.norm(np.squeeze(universal_pert)) / np.linalg.norm(np.squeeze(teX),
+                                                                                                       axis=1,
+                                                                                                       keepdims=True)
+        Pert_ratio_mean = np.mean(Pert_ratio)
+
         #######confusion matrxi of universal perturbation signals##################
         sns.set()
         f, ax = plt.subplots()
@@ -235,8 +243,8 @@ if __name__ == '__main__':
         C2 = np.load("confusion_matrix.npy")
         C2 = C2 / C2.sum(axis=1)
         sns.heatmap(C2, annot = True, ax=ax,linewidths='0.5', cmap="BuPu",
-                    xticklabels =['C1','C2','C3','C4','C5','C6','C7','C8','C9','C10','C11','C12','C13','C14','C15','C16','C17'],
-                    yticklabels =['C1','C2','C3','C4','C5','C6','C7','C8','C9','C10','C11','C12','C13','C14','C15','C16','C17'])  # 画热力图
+                    xticklabels =['C-1','C-2','C-3','C-4','C-5','C-6','C-7','C-8','C-9','C-10','C-11','C-12','C-13','C-14','C-15','C-16','C-17'],
+                    yticklabels =['C-1','C-2','C-3','C-4','C-5','C-6','C-7','C-8','C-9','C-10','C-11','C-12','C-13','C-14','C-15','C-16','C-17'])  # 画热力图
         font2 = {'family': 'Times New Roman',
                  'weight': 'normal',
                  'size': 30,
@@ -254,16 +262,17 @@ if __name__ == '__main__':
         fig = plt.figure()
         for i in range(17):
             plt.subplot(3, 6, i + 1)
-            plt.plot(teX[pqd_17_index[i],], 'b', label='Original')
-            plt.plot(adv_univer[pqd_17_index[i],], 'r', label='SAS')
+            plt.plot(teX[pqd_17_index[i],], 'b--', label='Original')
+            plt.plot(adv_univer[pqd_17_index[i],], 'r:', label='SAS')
             plt.legend()
-            plt.title("{}\n({})".format(pqd_type[pqd_17_predict_attack[i]], pqd_type[pqd_17_predict_normal[i]]),fontsize=10)
+            plt.title("C-{},{}\n(C-{},{})".format(pqd_17_predict_attack[i] +1, pqd_type[pqd_17_predict_attack[i]], pqd_17_predict_normal[i]+1, pqd_type[pqd_17_predict_normal[i]]),fontsize=10)
         plt.subplot(3, 6 ,18)
         plt.plot(universal_pert, 'g')
         plt.title("Universal Perturbation",fontsize=10)
         plt.legend()
 
         plt.subplots_adjust(wspace=0.2, hspace=0.3)
+        plt.subplots_adjust(left=0.01, right = 0.99, top=0.95, bottom=0.05)
         plt.show()
         ########################figure:Samples of Universal_Perturbation###########
 
