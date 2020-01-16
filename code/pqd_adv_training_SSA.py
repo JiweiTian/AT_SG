@@ -169,13 +169,21 @@ if __name__ == '__main__':
         SCORE2 = list()
         SCORE3 = list()
         SCORE4 = list()
-        # SCORE1 = np.load("B2020SCORE1.npy")
-        # SCORE2 = np.load("B2020SCORE2.npy")
-        # SCORE3 = np.load("B2020SCORE3.npy")
-        # SCORE4 = np.load("B2020SCORE4.npy")
+        # SCORE1 = np.load("22020SCORE1.npy")
+        # SCORE2 = np.load("22020SCORE2.npy")
+        # SCORE3 = np.load("22020SCORE3.npy")
+        # SCORE4 = np.load("22020SCORE4.npy")
         # real = np.array([SCORE1[:,1], SCORE2[:,1]]).T
         # att = np.array([SCORE3[:,1], SCORE4[:,1]]).T
-        for adv_train_epoch in range(0,10):
+        # ALL = np.concatenate((real, att),axis=1)
+        #
+        # import pandas as pd
+        # data_df = pd.DataFrame(ALL)
+        # writer = pd.ExcelWriter('Save_Excel.xlsx')
+        # data_df.to_excel(writer, 'page_1', float_format='%.5f')  # float_format 控制精度
+        # writer.save()
+
+        for adv_train_epoch in range(0,15):
             # score = model.evaluate(adv_SSA, labels, verbose=0)
             time_start = time.time()
             score = model.evaluate(trX, trY, verbose=0)
@@ -198,10 +206,10 @@ if __name__ == '__main__':
         SCORE2 = np.array(SCORE2, dtype=float)
         SCORE3 = np.array(SCORE3, dtype=float)
         SCORE4 = np.array(SCORE4, dtype=float)
-        np.save("B2020SCORE1.npy",np.array(SCORE1, dtype=float))
-        np.save("B2020SCORE2.npy", np.array(SCORE2, dtype=float))
-        np.save("B2020SCORE3.npy", np.array(SCORE3, dtype=float))
-        np.save("B2020SCORE4.npy", np.array(SCORE4, dtype=float))
+        np.save("A2020SCORE1.npy",np.array(SCORE1, dtype=float))
+        np.save("A2020SCORE2.npy", np.array(SCORE2, dtype=float))
+        np.save("A2020SCORE3.npy", np.array(SCORE3, dtype=float))
+        np.save("A2020SCORE4.npy", np.array(SCORE4, dtype=float))
         print('Done')
 
     #####################################################################SSA################################################################################################

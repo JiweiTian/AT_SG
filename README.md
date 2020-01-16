@@ -56,13 +56,13 @@ Comparsion of adversarial training:compare_adv_training.py
 
 leraning curve: pqd_learning_curve.py
 
-score1.npy
+A2020SCORE1.npy
 
-score2.npy
+A2020SCORE2.npy
 
-score3.npy
+A2020SCORE3.npy
 
-score4.npy
+A2020SCORE4.npy
 
 
 

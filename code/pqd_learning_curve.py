@@ -170,37 +170,60 @@ if __name__ == '__main__':
         score = model.evaluate(teX, teY, verbose=0)
         print('Test loss:', score[0])
         print('Test accuracy:', score[1])
-
-        score1 = np.load("score1.npy")
-        score2 = np.load("score2.npy")
-        score3 = np.load("score3.npy")
-        score4 = np.load("score4.npy")
+        score1 = np.load("A2020SCORE1.npy")
+        score2 = np.load("A2020SCORE2.npy")
+        score3 = np.load("A2020SCORE3.npy")
+        score4 = np.load("A2020SCORE4.npy")
         #########################################plot learning cureve###################################################
         fig = plt.figure()
         ax1 = fig.add_subplot(111)
-        ax1.plot(score1[0:11, 1], 'r-.x',markersize=10,label='Original (train)')
-        ax1.plot(score2[0:11, 1], 'r--o', label='Original (test)')
-        ax1.plot(score3[0:11, 1], 'b-.x', markersize=10,label='SSA (train)')
-        ax1.plot(score4[0:11, 1], 'b--o', label='SSA (test)')
+        ax1.plot(score1[0:11, 1] * 100, 'r-.x',markersize=10,label='Original (train)')
+        ax1.plot(score2[0:11, 1] * 100 , 'b--o', label='Original (test)')
+        ax1.plot(score3[0:11, 1] * 100, 'm-.x', markersize=10,label='SSA (train)')
+        ax1.plot(score4[0:11, 1] * 100, 'g--o', label='SSA (test)')
         ax1.set_xlabel('Epoch',fontsize=22)
-        ax1.set_ylabel('Accuracy',fontsize=20)
+        ax1.set_ylabel('Accuracy(%)',fontsize=20)
         ax1.set_xlim(0.0, 10)
-        ax1.set_ylim(0.0, 1.0)
+        ax1.set_ylim(0, 100)
         plt.legend(prop={'size':15})
 
         ax2 = ax1.twinx()
-        ax2.plot(score1[0:11, 0], 'm-.x',markersize=10, label='Original (train)')
-        ax2.plot(score2[0:11, 0], 'm--o', label='Original (test)')
-        ax2.plot(score3[0:11, 0], 'g-.x',markersize=10, label='SSA (train)')
+        ax2.plot(score1[0:11, 0], 'r-.x',markersize=10, label='Original (train)')
+        ax2.plot(score2[0:11, 0], 'b--o', label='Original (test)')
+        ax2.plot(score3[0:11, 0], 'm-.x',markersize=10, label='SSA (train)')
         ax2.plot(score4[0:11, 0], 'g--o', label='SSA (test)')
-        ax2.set_ylim(0.0, 5.0)
+        ax2.set_ylim(0.0, 20.0)
         ax2.set_ylabel('Loss', fontsize=23)
 
-        legend1 = ax1.legend(loc=(.11, .47), fontsize=13, shadow=True)
-        legend2 = ax2.legend(loc=(.59, .25), fontsize=13, shadow=True)
+        # ax3= plt.axes([.52, .40, .3, .3])
+        # ax3.plot(score1[8:10, 1] * 100, 'r-.x',markersize=10,label='Original (train)')
+        # ax3.plot(score2[8:10, 1] * 100 , 'b--o', label='Original (test)')
+        # ax3.plot(score3[8:10, 1] * 100, 'm-.x', markersize=10,label='SSA (train)')
+        # ax3.plot(score4[8:10, 1] * 100, 'g--o', label='SSA (test)')
+        # plt.setp(ax3, xticks=[], yticks=[])
+
+        from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes
+
+        axins = zoomed_inset_axes(ax1, 2.5, loc=7)
+        axins.plot(score1[0:11, 1] * 100, 'r-.x',markersize=10, label='Original (train)')
+        axins.plot(score2[0:11, 1] * 100, 'b--o', label='Original (test)')
+        axins.plot(score3[0:11, 1] * 100, 'm-.x',markersize=10, label='SSA (train)')
+        axins.plot(score4[0:11, 1] * 100, 'g--o', label='SSA (test)')
+        x1, x2, y1, y2 = 8, 10, 85, 100  # specify the limits
+        axins.set_xlim(x1, x2)  # apply the x-limits
+        axins.set_ylim(y1, y2)
+        plt.yticks(visible=False)
+        plt.xticks(visible=False)
+        from mpl_toolkits.axes_grid1.inset_locator import mark_inset
+
+        mark_inset(ax1, axins, loc1=2, loc2=4, fc="none", lw=2, ec='r')
+
+
+        legend1 = ax1.legend(loc=(.07, .33), fontsize=10, shadow=True)
+        legend2 = ax2.legend(loc=(.65, .07), fontsize=10, shadow=True)
         legend1.get_frame().set_facecolor('#FFFFFF')
         legend2.get_frame().set_facecolor('#FFFFFF')
-        plt.subplots_adjust(top=0.95, bottom=0.15)
+        plt.subplots_adjust(top=0.95, bottom=0.15,right = 0.85)
 
         plt.show()
         #########################################plot learning cureve###################################################
