@@ -157,23 +157,61 @@ if __name__ == '__main__':
     #model.save('17oldmodel_dnn_clean10.h5')
     #model = load_model('17model_dnn_clean5.h5')
     #model.save_weights('17oldweights_dnn_clean10.h5')
-    model.load_weights('17oldweights_dnn_clean10.h5')
-    score = model.evaluate(teX, teY, verbose=0)
-    print('Test loss:', score[0])
-    print('Test accuracy:', score[1])
+    # model.load_weights('17oldweights_dnn_clean10.h5')
+    # score = model.evaluate(teX, teY, verbose=0)
+    # print('Test loss:', score[0])
+    # print('Test accuracy:', score[1])
 
 
     print("done")
 
+    epoch_1 = list()
+    epoch_10 = list()
+
 
     with sess.as_default():
-        score = model.evaluate(teX, teY, verbose=0)
-        print('Test loss:', score[0])
-        print('Test accuracy:', score[1])
-        score1 = np.load("A2020SCORE1.npy")
-        score2 = np.load("A2020SCORE2.npy")
-        score3 = np.load("A2020SCORE3.npy")
-        score4 = np.load("A2020SCORE4.npy")
+        # score = model.evaluate(teX, teY, verbose=0)
+        # print('Test loss:', score[0])
+        # print('Test accuracy:', score[1])
+        score1 = np.load("22020SCORE1.npy")
+        score2 = np.load("22020SCORE2.npy")
+        score3 = np.load("22020SCORE3.npy")
+        score4 = np.load("22020SCORE4.npy")
+        # score1 = np.load("./10_trail/122020SCORE1.npy")
+        # score2 = np.load("./10_trail/122020SCORE2.npy")
+        # score3 = np.load("./10_trail/122020SCORE3.npy")
+        # score4 = np.load("./10_trail/122020SCORE4.npy")
+
+        real = np.array([score1[:,1],  score2[:,1]]).T
+        att = np.array([score3[:,1],  score4[:,1]]).T
+        ALL = np.concatenate((real, att),axis=1)
+
+        # import pandas as pd
+        # data_df = pd.DataFrame(ALL)
+        # writer = pd.ExcelWriter('Save_Excel_trail7.xlsx')
+        # data_df.to_excel(writer, 'page_1', float_format='%.5f')  # float_format 控制精度
+        # writer.save()
+
+        # epoch1 = [score1[1,1],score2[1,1],score3[1,1],score4[1,1]]
+        # epoch_1 = np.load("epoch_1.npy").tolist()
+        # epoch_1.append(epoch1)
+        # np.save("epoch_1.npy", epoch_1)
+        epoch_1 = np.load("epoch_1.npy")
+        # epoch_1 = np.delete(epoch_1, 8, 0)
+        EPOCH_1 = np.array(epoch_1)
+        mean_1, var1 = np.mean(EPOCH_1*100, axis = 0), np.std(EPOCH_1*100,axis =0)
+        # del epoch_1[6]
+
+
+        # epoch10 = [score1[10,1],score2[10,1],score3[10,1],score4[10,1]]
+        # epoch_10 = np.load("epoch_10.npy").tolist()
+        # epoch_10.append(epoch10)
+        # np.save("epoch_10.npy", epoch_10)
+        epoch_10 = np.load("epoch_10.npy")
+        # epoch_10 = np.delete(epoch_10, 8, 0)
+        EPOCH_10 = np.array(epoch_10)
+        mean_10, var10 = np.mean(EPOCH_10*100, axis=0), np.std(EPOCH_10*100, axis=0)
+        # del epoch_10[6]
         #########################################plot learning cureve###################################################
         fig = plt.figure()
         ax1 = fig.add_subplot(111)
@@ -192,7 +230,7 @@ if __name__ == '__main__':
         ax2.plot(score2[0:11, 0], 'b--o', label='Original (test)')
         ax2.plot(score3[0:11, 0], 'm-.x',markersize=10, label='SSA (train)')
         ax2.plot(score4[0:11, 0], 'g--o', label='SSA (test)')
-        ax2.set_ylim(0.0, 20.0)
+        ax2.set_ylim(0.0, 30.0)
         ax2.set_ylabel('Loss', fontsize=23)
 
         # ax3= plt.axes([.52, .40, .3, .3])
@@ -202,24 +240,24 @@ if __name__ == '__main__':
         # ax3.plot(score4[8:10, 1] * 100, 'g--o', label='SSA (test)')
         # plt.setp(ax3, xticks=[], yticks=[])
 
-        from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes
+        # from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes
+        #
+        # axins = zoomed_inset_axes(ax1, 2.0, loc=7)
+        # axins.plot(score1[0:11, 1] * 100, 'r-.x',markersize=10, label='Original (train)')
+        # axins.plot(score2[0:11, 1] * 100, 'b--o', label='Original (test)')
+        # axins.plot(score3[0:11, 1] * 100, 'm-.x',markersize=10, label='SSA (train)')
+        # axins.plot(score4[0:11, 1] * 100, 'g--o', label='SSA (test)')
+        # x1, x2, y1, y2 = 8, 10, 80, 100  # specify the limits
+        # axins.set_xlim(x1, x2)  # apply the x-limits
+        # axins.set_ylim(y1, y2)
+        # plt.yticks(visible=False)
+        # plt.xticks(visible=False)
+        # from mpl_toolkits.axes_grid1.inset_locator import mark_inset
+        #
+        # mark_inset(ax1, axins, loc1=2, loc2=4, fc="none", lw=2, ec='r')
 
-        axins = zoomed_inset_axes(ax1, 2.5, loc=7)
-        axins.plot(score1[0:11, 1] * 100, 'r-.x',markersize=10, label='Original (train)')
-        axins.plot(score2[0:11, 1] * 100, 'b--o', label='Original (test)')
-        axins.plot(score3[0:11, 1] * 100, 'm-.x',markersize=10, label='SSA (train)')
-        axins.plot(score4[0:11, 1] * 100, 'g--o', label='SSA (test)')
-        x1, x2, y1, y2 = 8, 10, 85, 100  # specify the limits
-        axins.set_xlim(x1, x2)  # apply the x-limits
-        axins.set_ylim(y1, y2)
-        plt.yticks(visible=False)
-        plt.xticks(visible=False)
-        from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 
-        mark_inset(ax1, axins, loc1=2, loc2=4, fc="none", lw=2, ec='r')
-
-
-        legend1 = ax1.legend(loc=(.07, .33), fontsize=10, shadow=True)
+        legend1 = ax1.legend(loc=(.15, .33), fontsize=10, shadow=True)
         legend2 = ax2.legend(loc=(.65, .07), fontsize=10, shadow=True)
         legend1.get_frame().set_facecolor('#FFFFFF')
         legend2.get_frame().set_facecolor('#FFFFFF')

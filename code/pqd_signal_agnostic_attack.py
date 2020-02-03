@@ -224,24 +224,32 @@ if __name__ == '__main__':
         rea_teY = np.argmax(teY[0:length2], axis=1)
         fooling_rate = np.sum(rea_teY != adv_y) / teY[0:length2].shape[0]
         print(fooling_rate)
+
+        #计算加通用扰动的时间
+        # aaa = teX[0]
+        # time_start = time.time()
+        # for ii in range(10000):
+        #     ttt = teX[0] + universal_pert
+        # time_end = time.time()
+        # time_on = (time_end - time_start)/10000
         
         adv_univer = teX + universal_pert
 
         pqd_predict_normal = np.argmax(model.predict(teX), axis=1)
         pqd_predict_attack = np.argmax(model.predict(adv_univer), axis=1)
 
-        Pert_ratio = np.linalg.norm(np.squeeze(universal_pert)) / np.linalg.norm(np.squeeze(teX),
-                                                                                                       axis=1,
-                                                                                                       keepdims=True)
+        Pert_ratio = np.linalg.norm(np.squeeze(universal_pert)) / np.linalg.norm(np.squeeze(teX),axis=1,keepdims=True)
         Pert_ratio_mean = np.mean(Pert_ratio)
 
         #######confusion matrxi of universal perturbation signals##################
-        sns.set()
+        '''sns.set()
         f, ax = plt.subplots()
         C2 = confusion_matrix(teY_original, pqd_predict_attack, labels=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16])
+
+
+        C2 = C2 / C2.sum(axis=1).reshape(17,1)
         np.save("confusion_matrix.npy", np.array(C2, dtype=float))
-        C2 = np.load("confusion_matrix.npy")
-        C2 = C2 / C2.sum(axis=1)
+        # C2 = np.load("confusion_matrix.npy")
         sns.heatmap(C2, annot = True, ax=ax,linewidths='0.5', cmap="BuPu",
                     xticklabels =['C-1','C-2','C-3','C-4','C-5','C-6','C-7','C-8','C-9','C-10','C-11','C-12','C-13','C-14','C-15','C-16','C-17'],
                     yticklabels =['C-1','C-2','C-3','C-4','C-5','C-6','C-7','C-8','C-9','C-10','C-11','C-12','C-13','C-14','C-15','C-16','C-17'])  # 画热力图
@@ -252,7 +260,7 @@ if __name__ == '__main__':
         ax.set_title('Confusion matrix',font2)
         ax.set_xlabel('Predict',font2)
         ax.set_ylabel('True',font2)
-        plt.show()
+        plt.show()'''
         #######confusion matrxi of universal perturbation signals##################
 
         ########################figure:Samples of Universal_Perturbation###########
@@ -263,7 +271,7 @@ if __name__ == '__main__':
         for i in range(17):
             plt.subplot(3, 6, i + 1)
             plt.plot(teX[pqd_17_index[i],], 'b--', label='Original')
-            plt.plot(adv_univer[pqd_17_index[i],], 'r:', label='SAS')
+            plt.plot(adv_univer[pqd_17_index[i],], 'r:', label='SAA')
             plt.legend()
             plt.title("C-{},{}\n(C-{},{})".format(pqd_17_predict_attack[i] +1, pqd_type[pqd_17_predict_attack[i]], pqd_17_predict_normal[i]+1, pqd_type[pqd_17_predict_normal[i]]),fontsize=10)
         plt.subplot(3, 6 ,18)

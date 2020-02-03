@@ -154,7 +154,7 @@ if __name__ == '__main__':
     signals = np.expand_dims(signals, axis=2)
     # labels = np.expand_dims(labels, axis=2)
 
-    def plot_embedding_2d(ax, X, y_data, title=None, number=None, colorbar=None):
+    def plot_embedding_2d(ax, X, y_data, title=None, number=None, colorbar=None, nh = None, accuracy = None):
         x_min, x_max = np.min(X, axis=0), np.max(X, axis=0)
         X = (X - x_min) / (x_max - x_min)
 
@@ -162,12 +162,12 @@ if __name__ == '__main__':
         vis_y = X[:, 1]
 
         cax = ax.scatter(vis_x, vis_y, c=y_data, s=1, cmap=plt.cm.get_cmap("gist_rainbow", 17))
-        if number == 1:
-            ax.set_xlabel("(a)", fontsize=25)
-        elif number == 2:
-            ax.set_xlabel("(b)", fontsize=25)
+        nh = round(nh * 100,2)
+        accuracy = round(accuracy * 100,2)
+        if number in "adg":
+            ax.set_xlabel("({})NH: {}%".format(number, nh), fontsize=17)
         else:
-            ax.set_xlabel("(c)", fontsize=25)
+            ax.set_xlabel("({})NH: {}%, Acc: {}%".format(number, nh, accuracy), fontsize=17)
 
         if colorbar == 1:
             cbar = plt.colorbar(cax, ticks= range(17))
@@ -260,134 +260,107 @@ if __name__ == '__main__':
     y_data = y_data.astype(np.int32).reshape(number_visualize, )
 
     ###########################################################Figure 1#################################################
-    '''fig = plt.figure(figsize=(16, 5))
+    fig = plt.figure(figsize=(12, 18))
 
-    ax = fig.add_subplot(1, 3, 1)
+    ax = fig.add_subplot(3, 3, 1)
     print("normal original data:")
     X_data = original_signals[0:number_visualize]
     t0 = time()
     X_tsne = tsne.fit_transform(X_data)
     print(X_tsne.shape)
-    plot_embedding_2d(ax, X_tsne[:, 0:2], y_data, "t-SNE 2D", 1, 0)
     NH = NeighborhoodHit(X_tsne[:, 0:2], y_data, n_neighbors=5)
+    plot_embedding_2d(ax, X_tsne[:, 0:2], y_data, "t-SNE 2D", 'a', 0, NH, 0)
     print("NH of normal original data:", NH)
     ax.set_xticks([])
     ax.set_yticks([])
 
 
-    ax = fig.add_subplot(1, 3, 2)
+    ax = fig.add_subplot(3, 3, 2)
     print("normal hidden output data (random cnn model):")
+    score = model.evaluate(signals[0:number_visualize], labels[0:number_visualize], verbose=0)
+    print('Test loss:', score[0])
+    print('Test accuracy:', score[1])
     original_signals = visualize_layer_model.predict(signals)
-    # np.save("visualize_radmom_cnn_signals_output.npy", np.array(original_signals, dtype=float))
-    # original_signals = np.load("visualize_radmom_cnn_signals_output.npy")
     X_data = original_signals[0:number_visualize]
     t0 = time()
     X_tsne = tsne.fit_transform(X_data)
     print(X_tsne.shape)
-    plot_embedding_2d(ax, X_tsne[:, 0:2], y_data, "t-SNE 2D", 2, 0)
     NH = NeighborhoodHit(X_tsne[:, 0:2], y_data, n_neighbors=5)
+    plot_embedding_2d(ax, X_tsne[:, 0:2], y_data, "t-SNE 2D", 'b', 0, NH, score[1])
     print("NH of normal hidden output data (random cnn model):", NH)
     ax.set_xticks([])
     ax.set_yticks([])
 
     print("trained cnn model:")
     model.load_weights('17oldweights_dnn_clean10.h5')
-    score = model.evaluate(teX, teY, verbose=0)
+    ax = fig.add_subplot(3, 3, 3)
+    score = model.evaluate(signals[0:number_visualize], labels[0:number_visualize], verbose=0)
     print('Test loss:', score[0])
     print('Test accuracy:', score[1])
-
-    ax = fig.add_subplot(1, 3, 3)
-    print("normal hidden ouotput data:")
+    print("normal hidden output data:")
     original_signals = visualize_layer_model.predict(signals)
-    # original_signals = np.load("visualize_output.npy")
     X_data = original_signals[0:number_visualize]
     t0 = time()
     X_tsne = tsne.fit_transform(X_data)
     print(X_tsne.shape)
-    plot_embedding_2d(ax, X_tsne[:, 0:2], y_data, "t-SNE 2D", 3, 1)
     NH = NeighborhoodHit(X_tsne[:, 0:2], y_data, n_neighbors=5)
+    plot_embedding_2d(ax, X_tsne[:, 0:2], y_data, "t-SNE 2D", 'c', 1, NH, score[1])
     print("NH of normal hidden data:", NH)
     ax.set_xticks([])
     ax.set_yticks([])
 
-    plt.tight_layout()
-    plt.subplots_adjust(left=0.01, top=0.95)
-    plt.show()
-    print("Figure 1 done")'''
-    ###########################################################Figure 1#################################################
 
-    ###########################################################Figure 2#################################################
-    '''fig = plt.figure(figsize=(16, 5))
-
-    ax = fig.add_subplot(1, 3, 1)
+    ax = fig.add_subplot(3, 3, 4)
     print("SSA original data:")
     original_signals = np.load("./adv_SSA_overshoot0.01_all.npy")
     original_signals = np.squeeze(original_signals)
     X_data = original_signals[0:number_visualize]
     t0 = time()
     X_tsne = tsne.fit_transform(X_data)
-    plot_embedding_2d(ax, X_tsne[:, 0:2], y_data, "t-SNE 2D", 1, 0)
     NH = NeighborhoodHit(X_tsne[:, 0:2], y_data, n_neighbors=5)
+    plot_embedding_2d(ax, X_tsne[:, 0:2], y_data, "t-SNE 2D", 'd', 0, NH,0)
     print("NH of SSA original data:", NH)
     ax.set_xticks([])
     ax.set_yticks([])
 
     print("trained cnn model:")
     model.load_weights('17oldweights_dnn_clean10.h5')
-    score = model.evaluate(teX, teY, verbose=0)
-    print('Test loss:', score[0])
-    print('Test accuracy:', score[1])
-    
-    ax = fig.add_subplot(1, 3, 2)
+    ax = fig.add_subplot(3, 3, 5)
     print("SSA hidden ouotput data:")
     adv_SSA_signals = np.load("./adv_SSA_overshoot0.01_all.npy")
-    visualize_adv_SSA_signals_output = visualize_layer_model.predict(adv_SSA_signals)
-    # np.save("visualize_adv_SSA_signals_output.npy", np.array(visualize_adv_SSA_signals_output, dtype=float))
-    # original_signals = np.load("visualize_adv_SSA_signals_output.npy")
+    score = model.evaluate(adv_SSA_signals[0:number_visualize], labels[0:number_visualize], verbose=0)
+    print('Test loss:', score[0])
+    print('Test accuracy:', score[1])
+    original_signals = visualize_layer_model.predict(adv_SSA_signals)
     X_data = original_signals[0:number_visualize]
     t0 = time()
     X_tsne = tsne.fit_transform(X_data)
-    plot_embedding_2d(ax, X_tsne[:, 0:2], y_data, "t-SNE 2D", 2, 0)
     NH = NeighborhoodHit(X_tsne[:, 0:2], y_data, n_neighbors=5)
+    plot_embedding_2d(ax, X_tsne[:, 0:2], y_data, "t-SNE 2D", 'e', 0, NH, score[1])
     print("NH of SSA hidden output data:", NH)
     ax.set_xticks([])
     ax.set_yticks([])
 
     print("adv trained cnn model:")
     model.load_weights('advtrain_weights_5.h5')
-    score = model.evaluate(teX, teY, verbose=0)
-    print('Test loss:', score[0])
-    print('Test accuracy:', score[1])
-
-    ax = fig.add_subplot(1, 3, 3)
-    print("SSA hidden ouotput data (adv trained cnn):")
+    ax = fig.add_subplot(3, 3, 6)
+    print("SSA hidden output data (adv trained cnn):")
     adv_SSA = np.load("./adv_SSA_overshoot0.01_all.npy")
-    score = model.evaluate(adv_SSA, labels, verbose=0)
+    original_signals = visualize_layer_model.predict(adv_SSA)
+    score = model.evaluate(adv_SSA[0:number_visualize], labels[0:number_visualize], verbose=0)
     print('Test loss:', score[0])
     print('Test accuracy:', score[1])
-    original_signals = visualize_layer_model.predict(adv_SSA)
-    # np.save("visualize_advtrain_cnn_ssa_signals_output.npy", np.array(original_signals, dtype=float))
-    # original_signals = np.load("visualize_advtrain_cnn_ssa_signals_output.npy")
+    original_signals = visualize_layer_model.predict(adv_SSA_signals)
     X_data = original_signals[0:number_visualize]
     t0 = time()
     X_tsne = tsne.fit_transform(X_data)
-    plot_embedding_2d(ax, X_tsne[:, 0:2], y_data, "t-SNE 2D", 3, 1)
     NH = NeighborhoodHit(X_tsne[:, 0:2], y_data, n_neighbors=5)
+    plot_embedding_2d(ax, X_tsne[:, 0:2], y_data, "t-SNE 2D", 'f', 1, NH, score[1])
     print("NH of SSA hidden output data:", NH)
     ax.set_xticks([])
     ax.set_yticks([])
-    plt.tight_layout()
-    plt.subplots_adjust(left=0.01, top=0.95)
-    plt.show()
 
-    print("done")'''
-
-    ###########################################################Figure 2#################################################
-
-    ###########################################################Figure 3#################################################
-    fig = plt.figure(figsize=(16, 5))
-
-    ax = fig.add_subplot(1, 3, 1)
+    ax = fig.add_subplot(3, 3, 7)
     print("universal input data :")
     universal_pert = np.load("universal_pert_5000_1_2.0.npy")
     adv_univer = signals + universal_pert
@@ -395,54 +368,54 @@ if __name__ == '__main__':
     X_data = original_signals[0:number_visualize]
     t0 = time()
     X_tsne = tsne.fit_transform(X_data)
-    plot_embedding_2d(ax, X_tsne[:, 0:2], y_data, "t-SNE 2D", 1, 0)
     NH = NeighborhoodHit(X_tsne[:, 0:2], y_data, n_neighbors=5)
+    plot_embedding_2d(ax, X_tsne[:, 0:2], y_data, "t-SNE 2D",'g', 0, NH,0)
     print("NH of SSA hidden output data:", NH)
     ax.set_xticks([])
     ax.set_yticks([])
 
-    ax = fig.add_subplot(1, 3, 2)
+    print("trained cnn model:")
+    model.load_weights('17oldweights_dnn_clean10.h5')
+    ax = fig.add_subplot(3, 3, 8)
     print("universal hidden output data :")
     universal_pert = np.load("universal_pert_5000_1_2.0.npy")
     adv_univer = signals + universal_pert
+    score = model.evaluate(adv_univer[0:number_visualize], labels[0:number_visualize], verbose=0)
+    print('Test loss:', score[0])
+    print('Test accuracy:', score[1])
     original_signals = visualize_layer_model.predict(adv_univer)
-    # np.save("visualize_universal_cnn_signals_output.npy", np.array(original_signals, dtype=float))
-    # original_signals = np.load("visualize_universal_cnn_signals_output.npy")
     X_data = original_signals[0:number_visualize]
     t0 = time()
     X_tsne = tsne.fit_transform(X_data)
-    plot_embedding_2d(ax, X_tsne[:, 0:2], y_data, "t-SNE 2D", 2, 0)
     NH = NeighborhoodHit(X_tsne[:, 0:2], y_data, n_neighbors=5)
+    plot_embedding_2d(ax, X_tsne[:, 0:2], y_data, "t-SNE 2D", 'h', 0, NH, score[1])
     print("NH of SSA hidden output data:", NH)
     ax.set_xticks([])
     ax.set_yticks([])
 
     print("adv trained cnn model:")
     model.load_weights('advtrain_weights_5.h5')
-    score = model.evaluate(teX, teY, verbose=0)
-    print('Test loss:', score[0])
-    print('Test accuracy:', score[1])
-
-    ax = fig.add_subplot(1, 3, 3)
+    ax = fig.add_subplot(3, 3, 9)
     print("universal hidden ouotput data (adv trained cnn):")
     universal_pert = np.load("universal_pert_5000_1_2.0.npy")
     adv_univer = signals + universal_pert
-    score = model.evaluate(adv_univer, labels, verbose=0)
+    score = model.evaluate(adv_univer[0:number_visualize], labels[0:number_visualize], verbose=0)
     print('Test loss:', score[0])
     print('Test accuracy:', score[1])
+    score = model.evaluate(adv_univer, labels, verbose=0)
     original_signals = visualize_layer_model.predict(adv_univer)
-    # np.save("visualize_universal_advcnn_signals_output.npy", np.array(original_signals, dtype=float))
-    # original_signals = np.load("visualize_universal_advcnn_signals_output.npy")
     X_data = original_signals[0:number_visualize]
     t0 = time()
     X_tsne = tsne.fit_transform(X_data)
-    plot_embedding_2d(ax, X_tsne[:, 0:2], y_data, "t-SNE 2D", 3, 1)
     NH = NeighborhoodHit(X_tsne[:, 0:2], y_data, n_neighbors=5)
+    plot_embedding_2d(ax, X_tsne[:, 0:2], y_data, "t-SNE 2D", 'i', 1, NH, score[1])
     print("NH of SSA hidden output data:", NH)
     ax.set_xticks([])
     ax.set_yticks([])
+
+
     plt.tight_layout()
-    plt.subplots_adjust(left=0.01, top=0.95)
+    plt.subplots_adjust(left=0.01, top=0.98, bottom=0.05, hspace = 0.15, wspace=0.02)
     plt.show()
     ###########################################################Figure 3#################################################
 
