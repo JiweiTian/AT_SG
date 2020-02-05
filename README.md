@@ -1,8 +1,20 @@
-# AT_SG
- Adversarial-Attacks-and-Defense-Methods-in-the-Smart-Grid
-This is the code example for attacking a normal Neural Networks with adversarial inputs （Adversarial Attacks and Defense Methods in the Smart Grid). 
+# AT_SG:Adversarial-Attacks-and-Defense-Methods-in-the-Smart-Grid
+This is the code example for attacking a normal Neural Networks in the Smart Grid with adversarial inputs. 
 
 Please put the data from github or dropbox together to the code folder.
+
+### Table of Contents
+0. [Introduction](#introduction)
+0. [Training the normal CNN](#Training-the-normal-CNN)
+0. [Attack the trained CNN](#Attack-the-trianed-CNN)
+0. [Defend——Adversarial training](#Defend-Adversarial-training)
+0. [Visualization](#Visualization)
+0. [Third-party re-implementations](#third-party-re-implementations)
+
+
+### Introduction
+
+### Training the normal CNN
 
 1> power quality assessment by classifying (17) voltage signals using deep CNN (pqd_classify.py).
 
