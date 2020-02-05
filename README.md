@@ -52,15 +52,19 @@ Using adversarial training as a defense method to improve robustness of learning
 
 Adversarial training based on FGSM: pqd_adv_training_FGSM.py
 
-robustness_epoch_FGSM = np.load("Perturbation_percent_FGSM_SSA_mean.npy")
+robustness_epoch_FGSM--------Perturbation_percent_FGSM_SSA_mean.npy
 
 Adversarial training based on SSA: pqd_adv_training_SSA.py
 
-robustness_epoch_SSA = np.load("Perturbation_percent_SSA_SSA_mean.npy")
+robustness_epoch_SSA--------Perturbation_percent_SSA_SSA_mean.npy
 
-trained the model using the original dataset for a fair comparison:robustness_normal = np.load("Perturbation_percent_normal_mean.npy")
+trained the model using the original dataset for a fair comparison
 
-the robustness of the CNN model before adversarial training: robustness_original = np.load("Original_robustness.npy")
+robustness_normal--------Perturbation_percent_normal_mean.npy
+
+the robustness of the CNN model before adversarial training
+
+robustness_original--------Original_robustness.npy
 
 Comparsion of adversarial training:compare_adv_training.py
 
