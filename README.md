@@ -3,9 +3,9 @@ This is the code example for attacking a normal Neural Networks in the Smart Gri
 
 Please put the data from github or dropbox together to the code folder.
 
-### Table of Contents
+## Table of Contents
 0. [Introduction](#introduction)
-0. [Training the normal CNN](#Training)
+0. [Training the normal CNN](#Training-the-normal-CNN)
 0. [Attack the trained CNN](#Attack-the-trianed-CNN)
 0. [Defend——Adversarial training](#Defend-Adversarial-training)
 0. [Visualization](#Visualization)
@@ -33,6 +33,8 @@ the deep CNN model is inspired by the reference:
 "A novel deep learning method for the classification of power quality disturbances using deep convolutional neural network" (Neural_Net_Module.py).
 
 The trained model achieves 98.5% testing accuracy (17oldweights_dnn_clean10.h5).
+
+### Attack the trained CNN
 
 2> Implementing the proposed signal-specific and more accurate algorithm to generate adversarial perturbation of signals (pqd_signal_specific_attack.py):
 
