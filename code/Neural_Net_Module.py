@@ -26,9 +26,7 @@ def dnn_model(input_dim):
     model.add(Activation('relu'))
     model.add(BatchNormalization())
 
-
     model.add(Flatten())
-
 
     model.add(Dense(256, activation='relu'))
     model.add(BatchNormalization())

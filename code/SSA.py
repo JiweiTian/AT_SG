@@ -34,7 +34,6 @@ def signal_specific(TEMP_CHANGE,sample_y, x,y,current, original, model, max_iter
         TEMP_CHANGE = adv_x
         # Update loop variables
         iteration = iteration + 1
-
     # need to clip this image into the given range
     # adv_x = np.clip((1 + overshoot) * r_tot + r, clip_min, clip_max) #### original
     adv_x = r_tot * (1 + overshoot) + TEMP_FIXED  #### my

@@ -26,7 +26,7 @@ from scipy.spatial.distance import cdist
 
 batch_size=32
 nb_epoch=10
-eps=0.5   ###0.4FGSM不能都成功，0.5FGSM能都成功(17种类型都改变分类结果)
+eps=0.5
 gamma=0
 
 def scaled_gradient(x, y, predictions):
@@ -110,8 +110,6 @@ if __name__ == '__main__':
 
     keras.backend.set_session(sess)
 
-    # data = sio.loadmat(r'signal.mat')  # 把这个路径改成你的mat路径即可
-    # signals = data['signal']
 
     data = h5py.File('17signal15000.mat','r')
     signals = data['signal'][:]
@@ -121,10 +119,6 @@ if __name__ == '__main__':
     signals_norm_mean = np.mean(signals_norm)
     print("mean of norm of signals：", signals_norm_mean)
 
-    # data = tables.openFile('signal.mat')
-
-    # mat = matlab.engine.start_matlab()
-    # data = mat.load("dataset.mat", nargout=1)
 
 
 

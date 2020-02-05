@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="326de012-e13c-4f5a-9b08-4346b69b4ac5" name="Default Changelist" comment="" />
+    <list default="true" id="326de012-e13c-4f5a-9b08-4346b69b4ac5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/AT_SG.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AT_SG.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/Neural_Net_Module.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Neural_Net_Module.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/SSA.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/SSA.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/compare_adv_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/compare_adv_training.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/plot_confusion_matrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/plot_confusion_matrix.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/pqd_FGSM.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/pqd_FGSM.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/pqd_SAA.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/pqd_SAA.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/pqd_SSA.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/pqd_SSA.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/pqd_adv_training_FGSM.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/pqd_adv_training_FGSM.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/pqd_adv_training_SSA.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/pqd_adv_training_SSA.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/pqd_classify.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/pqd_classify.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/pqd_learning_curve.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/pqd_learning_curve.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/pqd_signal_all.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/pqd_signal_all.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/pqd_visualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/pqd_visualization.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,25 +29,114 @@
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/pqd_adv_training_FGSM.py">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3531">
+              <caret line="249" column="36" selection-start-line="249" selection-start-column="36" selection-end-line="249" selection-end-column="36" />
+              <folding>
+                <element signature="e#15#37#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/compare_adv_training.py">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="275">
+              <caret line="11" column="42" lean-forward="true" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
+              <folding>
+                <element signature="e#16#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/Neural_Net_Module.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="331">
+              <caret line="29" selection-start-line="29" selection-end-line="29" />
+              <folding>
+                <element signature="e#33#50#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/pqd_visualization.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-6908">
+              <caret line="120" selection-start-line="120" selection-end-line="120" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/code/plot_confusion_matrix.py">
+        <entry file="file://$PROJECT_DIR$/code/SSA.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3319" />
+            <state relative-caret-position="725">
+              <caret line="35" column="33" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/pqd_adv_training_SSA.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="392">
+              <caret line="205" column="17" lean-forward="true" selection-start-line="205" selection-start-column="17" selection-end-line="205" selection-end-column="17" />
+              <folding>
+                <element signature="e#15#37#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/pqd_learning_curve.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-483">
+              <caret line="188" selection-start-line="188" selection-end-line="188" />
+              <folding>
+                <element signature="e#16#34#0" expanded="true" />
+              </folding>
+            </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/pqd_signal_all.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="336">
+              <caret line="170" column="39" selection-start-line="170" selection-start-column="39" selection-end-line="170" selection-end-column="39" />
+              <folding>
+                <element signature="e#15#37#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/plot_confusion_matrix.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="506">
+              <caret line="153" column="43" lean-forward="true" selection-start-line="153" selection-start-column="43" selection-end-line="153" selection-end-column="43" />
+              <folding>
+                <element signature="e#16#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/pqd_SAA.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="208">
+              <caret line="18" column="44" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="44" />
               <folding>
                 <element signature="e#15#37#0" expanded="true" />
               </folding>
@@ -47,6 +153,12 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>sns</find>
+      <find>confusion_matrix</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -54,6 +166,19 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/data/load.py" />
+        <option value="$PROJECT_DIR$/code/pqd_classify.py" />
+        <option value="$PROJECT_DIR$/code/pqd_FGSM.py" />
+        <option value="$PROJECT_DIR$/code/pqd_SSA.py" />
+        <option value="$PROJECT_DIR$/code/pqd_SAA.py" />
+        <option value="$PROJECT_DIR$/code/plot_confusion_matrix.py" />
+        <option value="$PROJECT_DIR$/code/pqd_adv_training_FGSM.py" />
+        <option value="$PROJECT_DIR$/code/pqd_adv_training_SSA.py" />
+        <option value="$PROJECT_DIR$/code/pqd_learning_curve.py" />
+        <option value="$PROJECT_DIR$/code/pqd_signal_all.py" />
+        <option value="$PROJECT_DIR$/code/compare_adv_training.py" />
+        <option value="$PROJECT_DIR$/code/Neural_Net_Module.py" />
+        <option value="$PROJECT_DIR$/code/pqd_visualization.py" />
+        <option value="$PROJECT_DIR$/code/SSA.py" />
       </list>
     </option>
   </component>
@@ -95,6 +220,14 @@
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="AT_SG" is-module-sdk="true">
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="AT_SG" />
+      </console-settings>
+    </option>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -151,9 +284,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4989154" visible="true" weight="0.22853369" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4989154" visible="true" weight="0.23910172" />
       <window_info id="Structure" order="1" sideWeight="0.5010846" side_tool="true" weight="0.19546892" />
       <window_info id="Favorites" order="2" sideWeight="0.5010846" side_tool="true" weight="0.19546892" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -174,24 +306,131 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/data/load.py" />
-    <entry file="file://$PROJECT_DIR$/code/compare_adv_training.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/pqd_signal_all.py">
+    <entry file="file://$PROJECT_DIR$/code/pqd_classify.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="2075">
+          <caret line="83" column="52" selection-start-line="83" selection-start-column="52" selection-end-line="83" selection-end-column="52" />
+          <folding>
+            <element signature="e#16#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/pqd_FGSM.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="151" column="44" selection-start-line="151" selection-start-column="19" selection-end-line="151" selection-end-column="44" />
+          <folding>
+            <element signature="e#15#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/pqd_SSA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="249" column="37" lean-forward="true" selection-start-line="249" selection-start-column="37" selection-end-line="249" selection-end-column="37" />
+          <folding>
+            <element signature="e#16#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/pqd_SAA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="18" column="44" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="44" />
           <folding>
             <element signature="e#15#37#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/pqd_adv_training_FGSM.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/plot_confusion_matrix.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3319" />
+        <state relative-caret-position="506">
+          <caret line="153" column="43" lean-forward="true" selection-start-line="153" selection-start-column="43" selection-end-line="153" selection-end-column="43" />
+          <folding>
+            <element signature="e#16#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/pqd_adv_training_FGSM.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3531">
+          <caret line="249" column="36" selection-start-line="249" selection-start-column="36" selection-end-line="249" selection-end-column="36" />
+          <folding>
+            <element signature="e#15#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/pqd_adv_training_SSA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="205" column="17" lean-forward="true" selection-start-line="205" selection-start-column="17" selection-end-line="205" selection-end-column="17" />
+          <folding>
+            <element signature="e#15#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/pqd_learning_curve.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-483">
+          <caret line="188" selection-start-line="188" selection-end-line="188" />
+          <folding>
+            <element signature="e#16#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/pqd_signal_all.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="170" column="39" selection-start-line="170" selection-start-column="39" selection-end-line="170" selection-end-column="39" />
+          <folding>
+            <element signature="e#15#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/compare_adv_training.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="11" column="42" lean-forward="true" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
+          <folding>
+            <element signature="e#16#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Neural_Net_Module.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+          <folding>
+            <element signature="e#33#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/pqd_visualization.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6908">
+          <caret line="120" selection-start-line="120" selection-end-line="120" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/SSA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="725">
+          <caret line="35" column="33" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>

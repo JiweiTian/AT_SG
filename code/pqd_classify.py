@@ -6,8 +6,6 @@ from numpy import shape
 import tensorflow as tf
 from Neural_Net_Module import dnn_model
 import h5py
-import matplotlib.pyplot as plt
-import mpl_toolkits.axisartist as axisartist
 
 batch_size=32
 nb_epoch=20
@@ -85,12 +83,6 @@ if __name__ == '__main__':
     x = tf.placeholder(tf.float32, shape=(None, 640, 1))
     y = tf.placeholder(tf.float32, shape=(None, 17))
 
-    #################################logits########################################
-    predictions = model(x) ###### after softmax
-    predictions_logits = predictions.op.inputs[0]  ###logits, before softmax
-    predictions = predictions_logits
-    #################################logits#######################################
-
     #sgd = SGD(lr=0.0001, decay=1e-6, momentum=0.9, nesterov=True)
     model.compile(loss=keras.losses.categorical_crossentropy,
                   optimizer=keras.optimizers.Nadam(lr=0.002, beta_1=0.9, beta_2=0.999, epsilon=1e-08, schedule_decay=0.004),
@@ -102,22 +94,5 @@ if __name__ == '__main__':
     score = model.evaluate(teX, teY, verbose=0)
     print('Test loss:', score[0])
     print('Test accuracy:', score[1])
-    Test_ACC_10 = np.load("Test_ACC_10.npy")
-    Test_ACC_mean = np.mean(Test_ACC_10 )
-    Test_ACC_std = np.std(Test_ACC_10, ddof=1)
-    Test_LOSS_10 = np.load("Test_LOSS_10.npy")
-    Train_ACC_10 = np.load("Train_ACC_10.npy")
-    Train_LOSS_10 = np.load("Train_LOSS_10.npy")
-    Train_ACC_mean = np.mean(Train_ACC_10 )
-    Train_ACC_std = np.std(Train_ACC_10, ddof=1)
-    ACC_10 = np.vstack((Train_ACC_10, Test_ACC_10)).T
-
-    import pandas as pd
-    data_df = pd.DataFrame(np.around(ACC_10.T, decimals=4))
-    writer = pd.ExcelWriter('ACC_10_2.xlsx')
-    data_df.to_excel(writer, 'page_1', float_format='%.5f')  # float_format 控制精度
-    writer.save()
-
-
 
     print("done")

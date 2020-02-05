@@ -239,8 +239,8 @@ if __name__ == '__main__':
         #######confusion matrxi of SSA##################
 
         pqd_predict_normal = np.argmax(model.predict(teX), axis=1)
-        adv_univer = np.load("adv_SSA.npy")
-        pqd_predict_attack = np.argmax(model.predict(adv_univer), axis=1)
+        adv_SSA = np.load("adv_SSA.npy")
+        pqd_predict_attack = np.argmax(model.predict(adv_SSA), axis=1)
         sns.set()
         f, ax = plt.subplots()
         C2 = confusion_matrix(teY_original, pqd_predict_attack, labels=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16])
@@ -248,7 +248,6 @@ if __name__ == '__main__':
 
         C2 = C2 / C2.sum(axis=1).reshape(17,1)
         np.save("confusion_matrix_SSA.npy", np.array(C2, dtype=float))
-        # C2 = np.load("confusion_matrix.npy")
         sns.heatmap(C2, annot = True, ax=ax,linewidths='0.5', cmap="BuPu",
                     xticklabels =['C-1','C-2','C-3','C-4','C-5','C-6','C-7','C-8','C-9','C-10','C-11','C-12','C-13','C-14','C-15','C-16','C-17'],
                     yticklabels =['C-1','C-2','C-3','C-4','C-5','C-6','C-7','C-8','C-9','C-10','C-11','C-12','C-13','C-14','C-15','C-16','C-17'])  # 画热力图

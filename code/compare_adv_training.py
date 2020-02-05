@@ -3,7 +3,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-
 robustness_original = np.load("Original_robustness.npy")
 
 robustness_epoch_SSA = np.load("Perturbation_percent_SSA_SSA_mean.npy")

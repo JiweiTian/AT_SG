@@ -1,18 +1,12 @@
 # coding=utf-8
-import scipy.io as sio
 import numpy as np
 import keras
 from numpy import shape
 import tensorflow as tf
 from Neural_Net_Module import dnn_model
-from keras.optimizers import SGD
 import h5py
-import tables
-import matlab
 import matplotlib.pyplot as plt
 import time
-from keras.models import load_model
-from signal_specific import signal_specific
 import mpl_toolkits.axisartist as axisartist
 from collections import Counter
 import seaborn as sns
@@ -20,7 +14,7 @@ from sklearn.metrics import confusion_matrix
 
 batch_size=32
 nb_epoch=10
-eps=0.5   ### eps = 0.5(FGSM) can misclassify all PQ signals
+eps=0.5
 gamma=0
 
 def scaled_gradient(x, y, predictions):
@@ -145,6 +139,8 @@ if __name__ == '__main__':
         adv_FGSM = np.expand_dims(adv_FGSM, axis=2)
         np.save("adv_FGSM.npy", adv_FGSM)
 
+
+        #### generate: confusion_matrix_FGSM.npy
         # pqd_predict_normal = np.argmax(model.predict(teX), axis=1)
         # pqd_predict_attack = np.argmax(model.predict(adv_FGSM), axis=1)
         # sns.set()

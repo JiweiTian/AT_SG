@@ -51,20 +51,17 @@ rea_teY = np.argmax(teY[0:length2], axis=1)
 adv_univer = teX + universal_pert
 
 
-#######confusion matrxi(本虚拟环境有问题，plot_confusion_matrix代码用anaconda主python环境画confusio matrix)##################
+########################################################calculate entropy###############################################
 sns.set()
 f, ax = plt.subplots()
-# C2 = confusion_matrix(teY_original, pqd_predict_attack,
-#                       labels=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])
-# np.save("confusion_matrix.npy", np.array(C2, dtype=float))
-C2 = np.load("confusion_matrix.npy")
+C2 = np.load("confusion_matrix_SAA.npy")        ##### load other .npy files:confusion_matrix_SSA.npy/confusion_matrix_FGSM.npy
 
 # C2 = np.ones([17,17])/17 ### max entropy
 
-######裁剪，省略小于0.05的（1/17）
-# mask1 = C2<0.05
-# C2[mask1] = 0
-######裁剪，省略小于0.05的（1/17）
+######prune:<0.05(1/17）
+mask1 = C2<0.05
+C2[mask1] = 0
+######prune:<0.05(1/17）
 
 
 def out_degree(C_matrix):
@@ -140,23 +137,24 @@ def in_degree(C_matrix):
     return np.array(weighted_log_2), np.array(weighted_sum_2), np.array(unweighted_log_2), np.array(unweighted_sum_2)
 
 W_node_inentropy, W_graph_inentropy, UW_node_inentropy, UW_graph_inentropy = in_degree(C22)
+########################################################calculate entropy###############################################
 
-
-
-C2 = np.load("confusion_matrix_FGSM.npy")
+####################################################plot confusion_matrix###############################################
+C2 = np.load("confusion_matrix_SAA.npy")
 sns.heatmap(C2, annot=True, ax=ax, linewidths='0.5', cmap="BuPu",
             xticklabels=['C-1', 'C-2', 'C-3', 'C-4', 'C-5', 'C-6', 'C-7', 'C-8', 'C-9', 'C-10', 'C-11', 'C-12', 'C-13',
                          'C-14', 'C-15', 'C-16', 'C-17'],
             yticklabels=['C-1', 'C-2', 'C-3', 'C-4', 'C-5', 'C-6', 'C-7', 'C-8', 'C-9', 'C-10', 'C-11', 'C-12', 'C-13',
-                         'C-14', 'C-15', 'C-16', 'C-17'])  # 画热力图
+                         'C-14', 'C-15', 'C-16', 'C-17'])
 font2 = {'family': 'Times New Roman',
          'weight': 'normal',
          'size': 30,
          }
-ax.set_title('Confusion matrix', font2)  # 标题
-ax.set_xlabel('Predict Class Label', font2)  # x轴
-ax.set_ylabel('True Label', font2)  # y轴
+ax.set_title('Confusion matrix', font2)
+ax.set_xlabel('Predict Class Label', font2)
+ax.set_ylabel('True Label', font2)
 # plt.subplots_adjust(left=0.05, right = 1.1, top=0.95, bottom=0.10)
 plt.show()
+####################################################plot confusion_matrix###############################################
 
 print("done")

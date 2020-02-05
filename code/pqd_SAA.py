@@ -12,7 +12,7 @@ import matlab
 import matplotlib.pyplot as plt
 import time
 from keras.models import load_model
-from signal_specific import signal_specific
+from SSA import signal_specific
 import mpl_toolkits.axisartist as axisartist
 from collections import Counter
 import seaborn as sns
@@ -225,7 +225,7 @@ if __name__ == '__main__':
         fooling_rate = np.sum(rea_teY != adv_y) / teY[0:length2].shape[0]
         print(fooling_rate)
 
-        #计算加通用扰动的时间
+        #time to add universal perturbation
         # aaa = teX[0]
         # time_start = time.time()
         # for ii in range(10000):
@@ -248,8 +248,8 @@ if __name__ == '__main__':
 
 
         C2 = C2 / C2.sum(axis=1).reshape(17,1)
-        np.save("confusion_matrix.npy", np.array(C2, dtype=float))
-        # C2 = np.load("confusion_matrix.npy")
+        np.save("confusion_matrix_SAA.npy", np.array(C2, dtype=float))
+        # C2 = np.load("confusion_matrix_SAA.npy")
         sns.heatmap(C2, annot = True, ax=ax,linewidths='0.5', cmap="BuPu",
                     xticklabels =['C-1','C-2','C-3','C-4','C-5','C-6','C-7','C-8','C-9','C-10','C-11','C-12','C-13','C-14','C-15','C-16','C-17'],
                     yticklabels =['C-1','C-2','C-3','C-4','C-5','C-6','C-7','C-8','C-9','C-10','C-11','C-12','C-13','C-14','C-15','C-16','C-17'])  # 画热力图

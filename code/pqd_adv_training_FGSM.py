@@ -29,7 +29,6 @@ def scaled_gradient(x, y, predictions):
     signed_grad = tf.sign(grad)
     return grad, signed_grad
 
-
 def jacobian_graph(predictions, x, nb_classes):
   """
   Create the Jacobian graph to be ran later in a TF session
@@ -50,14 +49,12 @@ def jacobian_graph(predictions, x, nb_classes):
 
   return list_derivatives
 
-
 def ssa_gradient(x, y, predictions):
     # loss: the mean of loss(cross entropy)
     # loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=predictions, labels=y))
     # grad, = tf.gradients(loss, x)
     grad = tf.stack(jacobian_graph(predictions, x, 17), axis=1)
     return grad
-
 
 def projection(values, eps, norm_p):
     """
@@ -169,11 +166,9 @@ if __name__ == '__main__':
     with sess.as_default():
     #############################################Adversarial Trainding based on FGSM################################################################################################
         for adv_train_epoch in range(0, 6):
-
             SCORE0 = list()
             SCORE1 = list()
             SCORE2 = list()
-
             ###################### Generate Adversarial Signals based on FGSM
             adv_FGSM = []
             Perturbation_percent_FGSM = list()
@@ -242,7 +237,6 @@ if __name__ == '__main__':
             print('Test accuracy:', score2[1])
             print('Done')
 
-
             ################Evaluate the Robustness of the new model based on SSA
             overshoot = 0.01
             Perturbation_percent_SSA = list()
@@ -254,7 +248,6 @@ if __name__ == '__main__':
             grad_ssa = ssa_gradient(x, y, predictions)
             counter = 0
             print("SSA Generating:")
-
             for q in range(length_attack):
                 if counter % 50 == 0 and counter > 0:
                     print("Attack on samples" + str(counter))
