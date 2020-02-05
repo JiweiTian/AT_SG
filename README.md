@@ -19,13 +19,13 @@ Vulnerability of various machine learning methods to adversarial examples has be
 
 ### Training the normal CNN
 
-Power quality assessment by classifying (17 classes) voltage signals using deep CNN (pqd_classify.py).
-
 A labeled dataset of 255000 signals was constructed using 15000 signals belonging to each class ([17signal15000.mat](https://www.dropbox.com/sh/aprts9x8l2frcjl/AABCuJ3TsJkSSLj2ZixeAyDAa?dl=0)).
 
 The voltage signals are generated considering the following references [1,2,3].
 
 The deep CNN model is inspired by the reference [4] (Neural_Net_Module.py).
+
+Power quality assessment by classifying (17 classes) voltage signals using deep CNN (pqd_classify.py).
 
 The trained models achieves 92.05% +/- 0.11 and 92.01% +/- 0.11 training and test accuracy, respectively (one trained model:17oldweights_dnn_clean10.h5).
 
@@ -42,7 +42,7 @@ Implementing the proposed signal-agnostic attack algorithm to generate universal
 
 pqd_SAA.py-----call SSA.py
 
-universal_pert_5000_1_2.0.npy :the overall misclassification probability can reach to 74%.
+Generated universal perturbation:universal_pert_5000_1_2.0.npy(the overall misclassification probability can reach to 74%).
 
 Randomly chosen clean signals (original) and the corresponding adversarial signals generated using the SAA,FGSM and SAA:pqd_signal_all.py
 
@@ -58,9 +58,9 @@ Adversarial training based on SSA: pqd_adv_training_SSA.py
 
 robustness_epoch_SSA = np.load("Perturbation_percent_SSA_SSA_mean.npy")
 
-robustness_original = np.load("Original_robustness.npy")
+trained the model using the original dataset for a fair comparison:robustness_normal = np.load("Perturbation_percent_normal_mean.npy")
 
-robustness_normal = np.load("Perturbation_percent_normal_mean.npy")
+the robustness of the CNN model before adversarial training: robustness_original = np.load("Original_robustness.npy")
 
 Comparsion of adversarial training:compare_adv_training.py
 
@@ -78,10 +78,6 @@ used adversarial training weights:advtrain_weights_5.h5
 
 used generated adverarial signals based on SSA: [adv_SSA_overshoot0.01_all.npy](https://www.dropbox.com/sh/aprts9x8l2frcjl/AABCuJ3TsJkSSLj2ZixeAyDAa?dl=0)
 
-
-
-The datasat is shared at the link below：
-https://www.dropbox.com/sh/aprts9x8l2frcjl/AABCuJ3TsJkSSLj2ZixeAyDAa?dl=0
 
 ### References
 
