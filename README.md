@@ -16,21 +16,16 @@ Please put the data from github or dropbox together to the code folder.
 
 ### Training the normal CNN
 
-1> power quality assessment by classifying (17) voltage signals using deep CNN (pqd_classify.py).
+power quality assessment by classifying (17 classes) voltage signals using deep CNN (pqd_classify.py).
 
 A labeled dataset of 255000 signals was constructed using 15000 signals belonging to each class (17signal15000.mat).
 
-the voltage signals are generated considering the following references:
+the voltage signals are generated considering the following references [1,2,3]:
 
-"Integral mathematical model of power quality disturbances"
 
-"Detection and Classification of Multiple Power Quality Disturbances based on Temporal Deep Learning"
 
-"Optimal Feature Selection for Power-Quality Disturbances Classification"
-
-the deep CNN model is inspired by the reference:
-
-"A novel deep learning method for the classification of power quality disturbances using deep convolutional neural network" (Neural_Net_Module.py).
+the deep CNN model is inspired by the reference [4]:
+ (Neural_Net_Module.py).
 
 The trained model achieves 98.5% testing accuracy (17oldweights_dnn_clean10.h5).
 
@@ -89,5 +84,13 @@ adv_SSA_overshoot0.01_all.npy
 
 The datasat is shared at the link below：
 https://www.dropbox.com/sh/aprts9x8l2frcjl/AABCuJ3TsJkSSLj2ZixeAyDAa?dl=0
+
+[1] Igual, Raúl, et al. "Integral mathematical model of power quality disturbances." 2018 18th International Conference on Harmonics and Quality of Power (ICHQP). IEEE, 2018.
+
+[2] Mohammadi, Mohammad, et al. "Detection and Classification of Multiple Power Quality Disturbances based on Temporal Deep Learning." 2019 IEEE International Conference on Environment and Electrical Engineering and 2019 IEEE Industrial and Commercial Power Systems Europe (EEEIC/I&CPS Europe). IEEE, 2019.
+
+[3] Lee C Y, Shen Y X. Optimal feature selection for power-quality disturbances classification[J]. IEEE Transactions on power delivery, 2011, 26(4): 2342-2351.
+
+[4] Wang S, Chen H. A novel deep learning method for the classification of power quality disturbances using deep convolutional neural network[J]. Applied energy, 2019, 235: 1126-1140.
 
 
