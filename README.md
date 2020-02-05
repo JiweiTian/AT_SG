@@ -9,7 +9,7 @@ Please put the data from github or dropbox together to the code folder.
 0. [Attack the trained CNN](#Attack-the-trained-CNN)
 0. [Defend——Adversarial training](#Defend-Adversarial-training)
 0. [Visualization](#Visualization)
-0. [Third-party re-implementations](#third-party-re-implementations)
+
 
 
 ### Introduction
@@ -51,6 +51,7 @@ universal_pert_5000_1_2.0.npy
 
 the overall misclassification probability can reach to 74%.
 
+### Defend Adversarial training
 
 4> Using adversarial training as a defense method to improve robustness of learning models ployed in power systems:
 
@@ -72,7 +73,7 @@ leraning curve: pqd_learning_curve.py
 
 
 
-
+##Visualization
 
 5> Qualitatively analyze the relationship between the characteristics of adversarial attacks to signals and defense methods 
 
