@@ -1,17 +1,17 @@
 # AT_SG:Adversarial Attacks and Defense Methods in the Smart Grid
-This is the code for reproducing results using the algorithms and methods proposed in the paper "Adversarial Attacks and Defense Methods in the Smart Grid". 
+This is the repository of the code which can be used for reproducing results using the algorithms and methods proposed in the paper "Adversarial Attacks and Defense Methods in the Smart Grid". 
 
-Please cite the following paper if you use the code provided in this repo:
+Please cite the following paper, if you use the code provided in this repo:
 
 Jiwei Tian, Buhong Wang,Tengyao Li, Fute Shang, Kunrui Cao, and Mete Ozay, Adversarial Attacks and Defense Methods in the Smart Grid, 2020.
 
 
 ## Table of Contents
 0. [Introduction](#introduction)
-0. [Training the normal CNN](#Training-the-normal-CNN)
-0. [Attack the trained CNN](#Attack-the-trained-CNN)
-0. [Defend——Adversarial training](#Defend-Adversarial-training)
-0. [Qualitatively analyses and Visualization](#Qualitatively-analyses-and-Visualization)
+0. [Training CNN Models using Datasets of Normal Signals](#Training-CNN-Models-using-Datasets-of-Normal-Signals)
+0. [Attacks on the Trained CNN Models](#Attacks-on-the-Trained-CNN-Models)
+0. [Defending CNN Models using Adversarial Training](#Defending-CNN-Models-using-Adversarial-Training)
+0. [Qualitative Analyses and Visualization of Signals and Learned Feature Representations](#Qualitative-Analyses-and-Visualization-of-Signals-and-Learned-Feature-Representations)
 0. [References](#References)
 
 
@@ -20,7 +20,7 @@ Jiwei Tian, Buhong Wang,Tengyao Li, Fute Shang, Kunrui Cao, and Mete Ozay, Adver
 
 Vulnerability of various machine learning methods to adversarial examples has been recently explored in the literature. Power systems which use these vulnerable methods face a huge threat against adversarial examples. To this end, we first propose a more accurate signal-specific method and a universal signal-agnostic method to attack power systems using generated adversarial examples. We then adopt adversarial training to defend against attacks of adversarial examples.
 
-### Training CNN models using normal data
+### Training CNN Models using Datasets of Normal Signals
 
 Note: In order to run the code, please put the data downloaded from github or dropbox together to the code folder.
 
@@ -34,7 +34,7 @@ Power quality assessment by classifying (17 classes) voltage signals using deep 
 
 The trained models achieves 92.05% +/- 0.11 and 92.01% +/- 0.11 training and test accuracy, respectively (one trained model:17oldweights_dnn_clean10.h5).
 
-### Attack on the trained CNN models
+### Attacks on the Trained CNN Models
 
 #### Signal-specific Attack Method (SSA)
 
