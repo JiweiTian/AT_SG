@@ -11,7 +11,7 @@ Jiwei Tian, Buhong Wang,Tengyao Li, Fute Shang, Kunrui Cao, and Mete Ozay, Adver
 0. [Training CNN Models using Datasets of Normal Signals](#Training-CNN-Models-using-Datasets-of-Normal-Signals)
 0. [Attacks on the Trained CNN Models](#Attacks-on-the-Trained-CNN-Models)
 0. [Defending CNN Models using Adversarial Training](#Defending-CNN-Models-using-Adversarial-Training)
-0. [Qualitative Analyses and Visualization of Signals and Learned Feature Representations](#Qualitative-Analyses-and Visualization-of-Signals-and-Learned-Feature-Representations)
+0. [Qualitative Analyses and Visualization of Signals and Learned Feature Representations](#Qualitative-Analyses-and-Visualization-of-Signals-and-Learned-Feature-Representations)
 0. [References](#References)
 
 
