@@ -162,23 +162,16 @@ if __name__ == '__main__':
     with sess.as_default():
 
     #####################################################################SSA################################################################################################
-        adv_SSA = np.load("adv_SSA_overshoot0.01_all.npy")
-        adv_trX = adv_SSA[:230000]
-        adv_teX = adv_SSA[230000:]
+        ###################### Adversarial Signals based on SSA
+        adv_SSA_all = np.load("adv_SSA_overshoot0.01_all.npy")
+        adv_trX = adv_SSA_all[:230000]
+        adv_teX = adv_SSA_all[230000:]
         SCORE1 = list()
         SCORE2 = list()
         SCORE3 = list()
         SCORE4 = list()
-        # SCORE1 = np.load("22020SCORE1.npy")
-        # SCORE2 = np.load("22020SCORE2.npy")
-        # SCORE3 = np.load("22020SCORE3.npy")
-        # SCORE4 = np.load("22020SCORE4.npy")
-        # real = np.array([SCORE1[:,1], SCORE2[:,1]]).T
-        # att = np.array([SCORE3[:,1], SCORE4[:,1]]).T
-        # ALL = np.concatenate((real, att),axis=1)
 
         for adv_train_epoch in range(0,10):
-            # score = model.evaluate(adv_SSA, labels, verbose=0)
             time_start = time.time()
             score = model.evaluate(trX, trY, verbose=0)
             SCORE1.append(score)
@@ -195,15 +188,86 @@ if __name__ == '__main__':
             time_cost = time_end - time_start
             print("time", time_cost)
 
+            ################Evaluate the Robustness of the new model based on SSA
+            overshoot = 0.01
+            Perturbation_percent_SSA = list()
+            Perturbation_percent_SSA_mean = list()
+            Perturbation_norm = list()
+            adv_SSA = []
+            counter = 0
+            max_iter = 50
+            nb_candidate = 17
+            print("SSA Generating:")
+            grad_ssa = ssa_gradient(x, y, predictions)
+            time_start = time.time()
+            length_attack = 25000
+            for q in range(length_attack):
+                if counter % 50 == 0 and counter > 0:
+                    print("Attack on samples" + str(counter))
+                TEMP_FIXED = np.copy(teX[counter])
+                TEMP_CHANGE = np.copy(teX[counter])
+
+                # Initialize the loop variables
+                iteration = 0
+                current = teY[counter]
+                if current.shape == ():
+                    current = np.array([current])
+                w = np.squeeze(np.zeros(TEMP_CHANGE.shape[1:]))  # same shape as original image
+                r_tot = np.zeros(TEMP_CHANGE.shape)
+                current = np.argmax(current)  # class
+                original = current  # use original label as the reference
+
+                # Repeat this main loop until we have achieved misclassification
+                while (np.any(current == original) and iteration < max_iter):
+                    gradients = sess.run(grad_ssa,feed_dict={x: TEMP_CHANGE.reshape(-1, 640,1), y: teY[counter].reshape(-1, 17),keras.backend.learning_phase(): 0})  ### calculate grads
+                    predictions_val = sess.run(predictions, feed_dict={x: TEMP_CHANGE.reshape(-1,640,1), y: teY[counter].reshape(-1, 17), keras.backend.learning_phase(): 0})
+                    pert = np.inf
+                    if np.all(current == original):
+                        for k in range(0, nb_candidate):
+                            while k != original:
+                                w_k = gradients[0, k, ...] - gradients[0, original, ...]
+                                f_k = predictions_val[0, k] - predictions_val[0, original]
+                                pert_k = (abs(f_k) + 0.00001) / (np.linalg.norm(w_k.flatten())+ 0.00001)
+                                if pert_k < pert:
+                                    pert = pert_k
+                                    w = w_k
+                                break
+                        r_i = pert * w / (np.linalg.norm(w) + 0.00001)
+                        r_tot[...] = r_tot[...] + r_i
+
+                    adv_x = r_tot + TEMP_FIXED
+                    adv_x_pred = np.argmax(model.predict(adv_x.reshape(1, 640,1)), axis=1)
+                    current = adv_x_pred
+                    TEMP_CHANGE = adv_x
+                    # Update loop variables
+                    iteration = iteration + 1
+
+                # need to clip this image into the given range
+                adv_x = r_tot * (1 + overshoot) + TEMP_FIXED
+                Perturbation_norm.append(np.linalg.norm(adv_x - TEMP_FIXED, keepdims = True))
+                perturbation_percent = np.linalg.norm(adv_x - TEMP_FIXED, keepdims = True) / np.linalg.norm(TEMP_FIXED)
+                Perturbation_percent_SSA.append(perturbation_percent)
+                adv_SSA.append(adv_x)
+                counter += 1
+
+            time_end = time.time()
+            time_cost = time_end - time_start
+            print("time", time_cost)
+            adv_SSA = np.array(adv_SSA, dtype=float).reshape(-1, 640)
+            adv_SSA = np.expand_dims(adv_SSA, axis=2)
+            Perturbation_percent_SSA = np.array(Perturbation_percent_SSA, dtype=float)
+            print("max of Perturbation_percent_ssa", Perturbation_percent_SSA.max())
+            print("mean of Perturbation_percent_ssa", np.mean(Perturbation_percent_SSA))
+            Perturbation_percent_SSA_mean.append(np.mean(Perturbation_percent_SSA))
+
             adv_train_epoch = adv_train_epoch + 1
-        SCORE1 = np.array(SCORE1, dtype=float)
-        SCORE2 = np.array(SCORE2, dtype=float)
-        SCORE3 = np.array(SCORE3, dtype=float)
-        SCORE4 = np.array(SCORE4, dtype=float)
+
         np.save("2020SCORE1.npy",np.array(SCORE1, dtype=float))
         np.save("2020SCORE2.npy", np.array(SCORE2, dtype=float))
         np.save("2020SCORE3.npy", np.array(SCORE3, dtype=float))
         np.save("2020SCORE4.npy", np.array(SCORE4, dtype=float))
+
+        np.save("Perturbation_percent_SSA_SSA_mean.npy", np.array(Perturbation_percent_SSA_mean, dtype=float))
         print('Done')
 
     #####################################################################SSA################################################################################################

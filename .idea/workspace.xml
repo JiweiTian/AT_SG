@@ -1,24 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="326de012-e13c-4f5a-9b08-4346b69b4ac5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/AT_SG.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AT_SG.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/Neural_Net_Module.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Neural_Net_Module.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/SSA.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/SSA.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/compare_adv_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/compare_adv_training.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/plot_confusion_matrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/plot_confusion_matrix.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/pqd_FGSM.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/pqd_FGSM.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/pqd_SAA.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/pqd_SAA.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/pqd_SSA.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/pqd_SSA.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/pqd_adv_training_FGSM.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/pqd_adv_training_FGSM.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/pqd_adv_training_SSA.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/pqd_adv_training_SSA.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/pqd_classify.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/pqd_classify.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/pqd_learning_curve.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/pqd_learning_curve.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/pqd_signal_all.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/pqd_signal_all.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/pqd_visualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/pqd_visualization.py" afterDir="false" />
-    </list>
+    <list default="true" id="326de012-e13c-4f5a-9b08-4346b69b4ac5" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

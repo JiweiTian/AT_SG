@@ -12,7 +12,7 @@ import matlab
 import matplotlib.pyplot as plt
 import time
 from keras.models import load_model
-from signal_specific import signal_specific
+from SSA import signal_specific
 import mpl_toolkits.axisartist as axisartist
 from collections import Counter
 import seaborn as sns
@@ -88,8 +88,8 @@ def projection(values, eps, norm_p):
     return values
 
 if __name__ == '__main__':
-    if keras.backend.image_dim_ordering() != 'tf':
-        keras.backend.set_image_dim_ordering('tf')
+    # if keras.backend.image_dim_ordering() != 'tf':
+    #     keras.backend.set_image_dim_ordering('tf')
 
 
     config = tf.ConfigProto()
@@ -134,7 +134,6 @@ if __name__ == '__main__':
 
 
 
-
     model = dnn_model(input_dim=640)
 
     x = tf.placeholder(tf.float32, shape=(None, 640, 1))
@@ -161,81 +160,55 @@ if __name__ == '__main__':
 
     print("done")
 
-    eps = 0.05
+    eps = 0.5
     gamma = 0
     with sess.as_default():
     #############################################Adversarial Trainding based on FGSM################################################################################################
+        ###################### Generate Adversarial Signals based on FGSM
+        adv_FGSM = []
+        counter = 0
+        print("FGSM Generating:")
+        grad, sign_grad = scaled_gradient(x, y, predictions)
+        time_start = time.time()
+        length_attack = 255000
+        for q in range(length_attack):
+            if counter % 50 == 0 and counter > 0:
+                print("Attack on samples" + str(counter))
+            TEMP_FIXED = np.copy(teX[counter])
+            TEMP_CHANGE = np.copy(teX[counter])
+            P, P_logits = sess.run([predictions, predictions_logits], feed_dict={x: TEMP_CHANGE.reshape(-1, 640, 1),
+                                                                                 keras.backend.learning_phase(): 0})
+            gradient_value, signed_grad, P, P_logits = sess.run([grad, sign_grad, predictions, predictions_logits],
+                                                                feed_dict={x: TEMP_CHANGE.reshape(-1, 640, 1),
+                                                                           y: teY[counter].reshape(-1, 17),
+                                                                           keras.backend.learning_phase(): 0})
+            saliency_mat = np.abs(gradient_value)
+            saliency_mat = (saliency_mat > np.percentile(np.abs(gradient_value), [gamma])).astype(int)
+            TEMP_CHANGE = TEMP_CHANGE + np.multiply(eps * signed_grad, saliency_mat)
+            adv_FGSM.append(TEMP_CHANGE)
+
+            counter += 1
+
+        time_end = time.time()
+        time_cost = time_end - time_start
+        print("time", time_cost)
+        adv_FGSM = np.array(adv_FGSM, dtype=float).reshape(-1, 640)
+        adv_FGSM = np.expand_dims(adv_FGSM, axis=2)
+        score = model.evaluate(adv_FGSM, teY[:length_attack], verbose=0)
+        print("test loss and accuracy against adversarial signals based on FGSM")
+        print('Test loss:', score[0])
+        print('Test accuracy:', score[1])
+
         for adv_train_epoch in range(0, 6):
-            SCORE0 = list()
-            SCORE1 = list()
-            SCORE2 = list()
-            ###################### Generate Adversarial Signals based on FGSM
-            adv_FGSM = []
-            Perturbation_percent_FGSM = list()
-            Perturbation_percent_FGSM_mean = list()
-            counter = 0
-            print("FGSM Generating:")
-            # Initialize the SGD optimizer
-            grad, sign_grad = scaled_gradient(x, y, predictions)
-            time_start = time.time()
-            length_attack = 25000
-            # length_attack = 250
-            for q in range(length_attack):
-                if counter % 50 == 0 and counter > 0:
-                    print("Attack on samples" + str(counter))
-                TEMP_FIXED = np.copy(teX[counter])
-                TEMP_CHANGE = np.copy(teX[counter])
-                P, P_logits = sess.run([predictions, predictions_logits], feed_dict={x: TEMP_CHANGE.reshape(-1, 640, 1),
-                                                                                     keras.backend.learning_phase(): 0})
-                gradient_value, signed_grad, P, P_logits = sess.run([grad, sign_grad, predictions, predictions_logits],
-                                                                    feed_dict={x: TEMP_CHANGE.reshape(-1, 640, 1),
-                                                                               y: teY[counter].reshape(-1, 17),
-                                                                               keras.backend.learning_phase(): 0})
-                saliency_mat = np.abs(gradient_value)
-                saliency_mat = (saliency_mat > np.percentile(np.abs(gradient_value), [gamma])).astype(int)
-                TEMP_CHANGE = TEMP_CHANGE + np.multiply(eps * signed_grad, saliency_mat)
-                adv_FGSM.append(TEMP_CHANGE)
-                perturbation_percent = np.linalg.norm(TEMP_CHANGE - TEMP_FIXED, keepdims=True) / np.linalg.norm(TEMP_FIXED)
-                Perturbation_percent_FGSM.append(perturbation_percent)
 
-                counter += 1
-
-            time_end = time.time()
-            time_cost = time_end - time_start
-            print("time", time_cost)
-
-            adv_FGSM = np.array(adv_FGSM, dtype=float).reshape(-1, 640)
-            adv_FGSM = np.expand_dims(adv_FGSM, axis=2)
-            score = model.evaluate(adv_FGSM, teY[:length_attack], verbose=0)
-            SCORE0.append(score)
-            print("test loss and accuracy against adversarial signals based on FGSM")
-            print('Test loss:', score[0])
-            print('Test accuracy:', score[1])
-            Perturbation_percent_FGSM = np.array(Perturbation_percent_FGSM, dtype=float)
-            print("max of Perturbation_percent_FGSM:", Perturbation_percent_FGSM.max())
-            print("mean of Perturbation_percent_FGSM:", np.mean(Perturbation_percent_FGSM))
-            Perturbation_percent_FGSM_mean.append(np.mean(Perturbation_percent_FGSM))
-
-            teY_pred = np.argmax(model.predict(teX[:length_attack], batch_size=32), axis=1)
-            adv_pred = np.argmax(model.predict(adv_FGSM, batch_size=32), axis=1)
+            adv_trX = adv_FGSM[:230000]
+            adv_teX = adv_FGSM[230000:]
 
             ################################## Adversarial Training Begins
-            model.fit(adv_FGSM, teY[:length_attack], batch_size=batch_size, epochs=1, validation_split=0.1, shuffle=True)
+            model.fit(adv_trX, trY, batch_size=batch_size, epochs=1, validation_split=0.1, shuffle=True)
             model.save('dnn_clean_FGSM_AT_{}.h5'.format(adv_train_epoch))
             model.save_weights('dnn_clean_FGSM_AT_{}.h5'.format(adv_train_epoch))
-            score = model.evaluate(adv_FGSM, teY[:length_attack], verbose=0)
-            SCORE1.append(score)
-            print("test loss and accuracy of new trainded model against adversarial signals based on FGSM")
-            print('Test loss:', score[0])
-            print('Test accuracy:', score[1])
-            print('Done')
-
-            print("test loss and accuracy of new trainded model against normal signals")
-            score2 = model.evaluate(teX, teY, verbose=0)
-            SCORE2.append(score2)
-            print('Test loss:', score2[0])
-            print('Test accuracy:', score2[1])
-            print('Done')
+            score = model.evaluate(adv_teX, teY, verbose=0)
 
             ################Evaluate the Robustness of the new model based on SSA
             overshoot = 0.01
@@ -253,7 +226,7 @@ if __name__ == '__main__':
                     print("Attack on samples" + str(counter))
                 TEMP_FIXED = np.copy(teX[counter])
                 TEMP_CHANGE = np.copy(teX[counter])
-
+                
                 # Initialize the loop variables
                 iteration = 0
                 current = teY[counter]
@@ -284,8 +257,7 @@ if __name__ == '__main__':
                         r_i = pert * w / (np.linalg.norm(w) + 0.00001)
                         r_tot[...] = r_tot[...] + r_i
 
-                    #adv_x = np.clip(r_tot + r, clip_min, clip_max)   #### original
-                    adv_x = r_tot + TEMP_FIXED     #### my
+                    adv_x = r_tot + TEMP_FIXED
                     adv_x_pred = np.argmax(model.predict(adv_x.reshape(1, 640,1)), axis=1)
                     current = adv_x_pred
                     TEMP_CHANGE = adv_x
@@ -293,8 +265,7 @@ if __name__ == '__main__':
                     iteration = iteration + 1
 
                 # need to clip this image into the given range
-                # adv_x = np.clip((1 + overshoot) * r_tot + r, clip_min, clip_max) #### original
-                adv_x = r_tot * (1 + overshoot) + TEMP_FIXED    #### my
+                adv_x = r_tot * (1 + overshoot) + TEMP_FIXED
                 Perturbation_norm.append(np.linalg.norm(adv_x - TEMP_FIXED, keepdims = True))
                 perturbation_percent = np.linalg.norm(adv_x - TEMP_FIXED, keepdims = True) / np.linalg.norm(TEMP_FIXED)
                 Perturbation_percent_SSA.append(perturbation_percent)
@@ -311,12 +282,8 @@ if __name__ == '__main__':
             print("mean of Perturbation_percent_ssa", np.mean(Perturbation_percent_SSA))
             Perturbation_percent_SSA_mean.append(np.mean(Perturbation_percent_SSA))
 
-
             adv_train_epoch = adv_train_epoch + 1
 
-        np.save("SCORE0.npy", np.array(SCORE0, dtype=float))
-        np.save("SCORE1.npy", np.array(SCORE1, dtype=float))
-        np.save("SCORE2.npy", np.array(SCORE2, dtype=float))
         np.save("Perturbation_percent_FGSM_SSA_mean.npy",np.array(Perturbation_percent_SSA_mean, dtype=float))
 
         print('Done')
