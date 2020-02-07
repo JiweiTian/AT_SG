@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dfde9391-8d5c-42a8-bf7a-ce31b66e9164" name="Default Changelist" comment="" />
+    <list default="true" id="dfde9391-8d5c-42a8-bf7a-ce31b66e9164" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pqd_SAA.py" beforeDir="false" afterPath="$PROJECT_DIR$/pqd_SAA.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,7 +24,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -91,6 +95,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="789" y="229" key="FileChooserDialogImpl" timestamp="1581069089376">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="789" y="229" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1581069089376" />
     <state width="1515" height="210" key="GridCell.Tab.0.bottom" timestamp="1581064581343">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -107,13 +115,13 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1515" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1581064581343" />
-    <state x="272" y="58" key="SettingsEditor" timestamp="1581062461550">
+    <state x="283" y="57" key="SettingsEditor" timestamp="1581069111969">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="272" y="58" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1581062461550" />
-    <state x="461" y="241" key="com.intellij.ide.util.TipDialog" timestamp="1581067119853">
+    <state x="283" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1581069111969" />
+    <state x="461" y="241" key="com.intellij.ide.util.TipDialog" timestamp="1581080099001">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="461" y="241" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1581067119853" />
+    <state x="461" y="241" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1581080099001" />
   </component>
 </project>

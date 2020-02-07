@@ -46,7 +46,7 @@ For comparsion, we also implemented the FGSM based attack method (pqd_FGSM.py).
 
 pqd_SAA.py and SSA.py: Implementation of the proposed signal-agnostic attack method (SAA) to generate universal perturbations that make trained CNN models misclassify natural PQ signals with high probability.
 
-universal_pert_5000_1_2.0.npy: Code for generating universal perturbations. The overall misclassification probability can reach to 74% on the adversarial signals generated using this code.
+universal_pert_5000_1_2.0.npy: generated universal perturbations. The overall misclassification probability can reach to 74% on the adversarial signals using the generated universal perturbations.
 
 pqd_signal_all.py: Code for generating randomly chosen clean signals (original) and the corresponding adversarial signals generated using the SAA, FGSM and SAA.
 
@@ -62,11 +62,11 @@ pqd_adv_training_SSA.py: Code for adversarial training using adversarial signals
 
 The output robustness_epoch_SSA is saved to the file Perturbation_percent_SSA_SSA_mean.npy
 
-Code for training the model using the original dataset for a fair comparison:
+Code for training the model using the original dataset for a fair comparison (based on pqd_classify.py):
 
 The output robustness_normal is saved to the file Perturbation_percent_normal_mean.npy
 
-Code for analysis of robustness of the CNN model before adversarial training:
+Code for analysis of robustness of the CNN model before adversarial training (based on pqd_SSA.py):
 
 The output robustness_original is saved to the file Original_robustness.npy
 
@@ -78,7 +78,7 @@ pqd_learning_curve.py: Code for displaying learning curves (data/8-trail).
 
 ### Qualitative Analyses and Visualization of Signals and Learned Feature Representations
 
-plot_confusion_matrix.py: Code used for qualitatively analysis of the relationship between the characteristics of adversarial attacks to signals and defense methods, such as by calculating normalized confusion matrices and computation of class-confusion graphs.
+plot_confusion_matrix.py: Code used for qualitatively analysis of the relationship between the characteristics of adversarial attacks to signals and defense methods, such as by calculating normalized confusion matrices and computation of class-confusion graphs (based on Gephi software).
 
 pqd_visualization.py: Code used for visualizing signal measurements and their feature representations learned at different layers of DNNs using the t-SNE.
 

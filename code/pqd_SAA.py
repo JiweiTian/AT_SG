@@ -187,7 +187,6 @@ if __name__ == '__main__':
                 current = np.argmax(current)  # class
                 original = current  # use original label as the reference
 
-                #####貌似少了if判断，如果加了扰动已经满足条件，则该样本无需再生成对抗扰动
 
                 # Repeat this main loop until we have achieved mis classification
                 adv_x = signal_specific(teX[counter] + universal_pert, sample_y, x, y, current, original, model, max_iter,
@@ -198,7 +197,6 @@ if __name__ == '__main__':
                     # Project on L_p ball
                     universal_pert = projection(universal_pert,8, 2)
 
-                ####### 貌似没有终止条件
                 if counter % 5000 == 0:
                     print(np.linalg.norm(universal_pert, ord=2, keepdims=True))
                     np.save("universal_pert_5000_{}_{}.npy".format(nb_iter,counter/5000), universal_pert)
