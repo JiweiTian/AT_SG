@@ -1,9 +1,10 @@
-# AT_SG:Adversarial Attacks and Defense Methods in the Smart Grid
-This is the repository of the code which can be used for reproducing results using the algorithms and methods proposed in the paper "Adversarial Attacks and Defense Methods in the Smart Grid". 
+# AT_SG:Adversarial Attacks and Defense for CNN based Power Quality Recognition in Power Network
+This is the repository of the code which can be used for reproducing results using the algorithms and methods proposed in the paper "Adversarial Attacks and Defense for CNN based
+Power Quality Recognition in Power Network". 
 
 Please cite the following paper, if you use the code provided in this repo:
 
-Jiwei Tian, Buhong Wang,Tengyao Li, Fute Shang, Kunrui Cao, and Mete Ozay, Adversarial Attacks and Defense Methods in the Smart Grid, 2020.
+Jiwei Tian,et.al. Adversarial Attacks and Defense for CNN based Power Quality Recognition in Power Network, 2020.
 
 
 ## Table of Contents
